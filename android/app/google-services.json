@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "726132042513",
+    "project_id": "farmarket-ug",
+    "storage_bucket": "farmarket-ug.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:726132042513:android:909295b9567b18ce967ab0",
+        "android_client_info": {
+          "package_name": "com.farmarket.farmarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "726132042513-tf7bfsmev1ftu4ngquqbqhkj4u5p61s2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDv5eMl7erlPeK_XlGqJj_R5yn3dxiKmW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "726132042513-tf7bfsmev1ftu4ngquqbqhkj4u5p61s2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
