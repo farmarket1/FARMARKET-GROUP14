@@ -1,16 +1,6 @@
 import 'package:e_commerce_app_flutter/models/Model.dart';
-import 'package:enum_to_string/enum_to_string.dart';
 
 enum ProductType { Fruits, Vegetables, Flour, Grains, Dairy }
-
-// enum ProductType {
-//   Electronics,
-//   Books,
-//   Fashion,
-//   Groceries,
-//   Art,
-//   Others,
-// }
 
 class Product extends Model {
   static const String IMAGES_KEY = "images";
@@ -71,8 +61,6 @@ class Product extends Model {
       images: (map[IMAGES_KEY] ?? []).cast<String>(),
       title: map[TITLE_KEY],
       variant: map[VARIANT_KEY],
-      productType:
-          EnumToString.fromString(ProductType.values, map[PRODUCT_TYPE_KEY]),
       discountPrice: map[DISCOUNT_PRICE_KEY],
       originalPrice: map[ORIGINAL_PRICE_KEY],
       rating: map[RATING_KEY],
@@ -80,7 +68,6 @@ class Product extends Model {
       description: map[DESCRIPTION_KEY],
       seller: map[SELLER_KEY],
       owner: map[OWNER_KEY],
-      searchTags: map[SEARCH_TAGS_KEY].cast<String>(),
     );
   }
 
@@ -90,7 +77,6 @@ class Product extends Model {
       IMAGES_KEY: images,
       TITLE_KEY: title,
       VARIANT_KEY: variant,
-      PRODUCT_TYPE_KEY: EnumToString.convertToString(productType),
       DISCOUNT_PRICE_KEY: discountPrice,
       ORIGINAL_PRICE_KEY: originalPrice,
       RATING_KEY: rating,
@@ -98,7 +84,6 @@ class Product extends Model {
       DESCRIPTION_KEY: description,
       SELLER_KEY: seller,
       OWNER_KEY: owner,
-      SEARCH_TAGS_KEY: searchTags,
     };
 
     return map;
@@ -116,10 +101,7 @@ class Product extends Model {
     if (highlights != null) map[HIGHLIGHTS_KEY] = highlights;
     if (description != null) map[DESCRIPTION_KEY] = description;
     if (seller != null) map[SELLER_KEY] = seller;
-    if (productType != null)
-      map[PRODUCT_TYPE_KEY] = EnumToString.convertToString(productType);
     if (owner != null) map[OWNER_KEY] = owner;
-    if (searchTags != null) map[SEARCH_TAGS_KEY] = searchTags;
 
     return map;
   }
