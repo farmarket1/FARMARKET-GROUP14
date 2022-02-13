@@ -1,6 +1,5 @@
 import 'package:e_commerce_app_flutter/services/database/product_database_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:logger/logger.dart';
 import '../constants.dart';
 import 'package:e_commerce_app_flutter/models/Product.dart';
@@ -52,101 +51,6 @@ class ProductCard extends StatelessWidget {
       ),
     );
   }
-
-  // Column buildProductCardItems(Product product) {
-  //   return Column(
-  //     mainAxisAlignment: MainAxisAlignment.center,
-  //     children: [
-  //       Flexible(
-  //         flex: 2,
-  //         child: Padding(
-  //           padding: const EdgeInsets.all(8.0),
-  //           child: Image.network(
-  //             product.images[0],
-  //             fit: BoxFit.contain,
-  //           ),
-  //         ),
-  //       ),
-  //       SizedBox(height: 10),
-  //       Flexible(
-  //         flex: 2,
-  //         child: Column(
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           children: [
-  //             Flexible(
-  //               flex: 1,
-  //               child: Text(
-  //                 "${product.title}\n",
-  //                 style: TextStyle(
-  //                   color: kTextColor,
-  //                   fontSize: 13,
-  //                   fontWeight: FontWeight.bold,
-  //                 ),
-  //                 maxLines: 2,
-  //                 overflow: TextOverflow.ellipsis,
-  //               ),
-  //             ),
-  //             SizedBox(height: 5),
-  //             Flexible(
-  //               flex: 1,
-  //               child: Row(
-  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                 children: [
-  //                   Flexible(
-  //                     flex: 5,
-  //                     child: Text.rich(
-  //                       TextSpan(
-  //                         text: "\UGX ${product.discountPrice}\n",
-  //                         style: TextStyle(
-  //                           color: kPrimaryColor,
-  //                           fontWeight: FontWeight.w700,
-  //                           fontSize: 12,
-  //                         ),
-  //                         children: [
-  //                           TextSpan(
-  //                             text: "\UGX ${product.originalPrice}",
-  //                             style: TextStyle(
-  //                               color: kTextColor,
-  //                               decoration: TextDecoration.lineThrough,
-  //                               fontWeight: FontWeight.normal,
-  //                               fontSize: 11,
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                     ),
-  //                   ),
-  //                   Flexible(
-  //                     flex: 3,
-  //                     child: Stack(
-  //                       children: [
-  //                         SvgPicture.asset(
-  //                           "assets/icons/DiscountTag.svg",
-  //                           color: kPrimaryColor,
-  //                         ),
-  //                         Center(
-  //                           child: Text(
-  //                             "${product.calculatePercentageDiscount()}%\nOff",
-  //                             style: TextStyle(
-  //                               color: Colors.white,
-  //                               fontSize: 8,
-  //                               fontWeight: FontWeight.w900,
-  //                             ),
-  //                             textAlign: TextAlign.center,
-  //                           ),
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
 
   buildProductCard(Product product) {
     return Column(
@@ -205,7 +109,7 @@ class ProductCard extends StatelessWidget {
                       TextSpan(
                         text: "${product.title}\n".toUpperCase(),
                         style: TextStyle(
-                          fontSize: 15.0,
+                          fontSize: 11.0,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
@@ -224,13 +128,13 @@ class ProductCard extends StatelessWidget {
                 Column(
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.all(3.0),
+                      padding: EdgeInsets.all(2.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30.0),
                         color: kPrimaryColor.withOpacity(0.09),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(2.0),
                         child: Text(
                           'UGX ${product.discountPrice}',
                           style: TextStyle(
@@ -256,13 +160,6 @@ class ProductCard extends StatelessWidget {
                                 decorationThickness: 3.0,
                               ),
                             ),
-                            // TextSpan(
-                            //   text: ' ${product.discountPrice}',
-                            //   style: TextStyle(
-                            //     fontSize: 16.0,
-                            //     color: kPrimaryColor,
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),

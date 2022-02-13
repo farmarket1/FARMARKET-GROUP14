@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:async';
 
 import 'package:e_commerce_app_flutter/exceptions/firebaseauth/messeged_firebaseauth_exception.dart';
@@ -246,6 +248,7 @@ class AuthentificationService {
 
       final authCredentials =
           await currentUser!.reauthenticateWithCredential(authCredential);
+      // ignore: unnecessary_null_comparison
       return authCredentials != null;
     } on MessagedFirebaseAuthException {
       rethrow;

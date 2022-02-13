@@ -1,20 +1,20 @@
 import 'package:e_commerce_app_flutter/components/async_progress_dialog.dart';
 import 'package:e_commerce_app_flutter/constants.dart';
-import 'package:e_commerce_app_flutter/screens/about_developer/about_developer_screen.dart';
+// import 'package:e_commerce_app_flutter/screens/about_developer/about_developer_screen.dart';
 import 'package:e_commerce_app_flutter/screens/change_display_picture/change_display_picture_screen.dart';
 import 'package:e_commerce_app_flutter/screens/change_email/change_email_screen.dart';
 import 'package:e_commerce_app_flutter/screens/change_password/change_password_screen.dart';
 import 'package:e_commerce_app_flutter/screens/change_phone/change_phone_screen.dart';
 import 'package:e_commerce_app_flutter/screens/edit_product/edit_product_screen.dart';
 import 'package:e_commerce_app_flutter/screens/manage_addresses/manage_addresses_screen.dart';
-import 'package:e_commerce_app_flutter/screens/my_orders/my_orders_screen.dart';
+// import 'package:e_commerce_app_flutter/screens/my_orders/my_orders_screen.dart';
 import 'package:e_commerce_app_flutter/screens/my_products/my_products_screen.dart';
 import 'package:e_commerce_app_flutter/services/authentification/authentification_service.dart';
 import 'package:e_commerce_app_flutter/services/database/user_database_helper.dart';
 import 'package:e_commerce_app_flutter/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
+// import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:logger/logger.dart';
 import '../../change_display_name/change_display_name_screen.dart';
 

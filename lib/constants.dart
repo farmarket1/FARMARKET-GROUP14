@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:e_commerce_app_flutter/size_config.dart';
 
-const String appName = "E-Shopee";
+const String appName = "farmarket";
 
 const kPrimaryColor = Color(0xFF2E7D32);
 const kPrimaryLightColor = Color(0xFF295300);
