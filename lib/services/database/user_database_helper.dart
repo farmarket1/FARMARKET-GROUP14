@@ -42,6 +42,14 @@ class UserDatabaseHelper {
     });
   }
 
+   Future<void> createTransporter(String uid,String maxCapacity,String plateNo,String fullname) async {
+    await firestore!.collection("transporter").doc(uid).set({
+      "name": fullname,
+      "maxcapacity":maxCapacity,
+      "plateNo": plateNo,
+    });
+  }
+
   Future<void> deleteCurrentUserData() async {
     final uid = AuthentificationService().currentUser!.uid;
     final docRef = firestore!.collection(USERS_COLLECTION_NAME).doc(uid);

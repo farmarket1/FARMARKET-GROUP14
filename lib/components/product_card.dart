@@ -77,7 +77,7 @@ class ProductCard extends StatelessWidget {
                   '20% Off',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 12.0,
+                    fontSize: 11.0,
                   ),
                 ),
               ),
@@ -139,7 +139,7 @@ class ProductCard extends StatelessWidget {
                           'UGX ${product.discountPrice}',
                           style: TextStyle(
                             color: kPrimaryColor,
-                            fontSize: 12.0,
+                            fontSize: 11.0,
                           ),
                         ),
                       ),

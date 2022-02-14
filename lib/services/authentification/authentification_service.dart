@@ -111,7 +111,6 @@ class AuthentificationService {
       rethrow;
     }
   }
-
   Future<bool> signUp(
       {required String email,
       required String password,
@@ -126,6 +125,43 @@ class AuthentificationService {
       }
       await userCredential.user!.updateProfile(displayName: fullname);
       await UserDatabaseHelper().createNewUser(uid, isSeller);
+      return true;
+    } on MessagedFirebaseAuthException {
+      rethrow;
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case EMAIL_ALREADY_IN_USE_EXCEPTION_CODE:
+          throw FirebaseSignUpAuthEmailAlreadyInUseException();
+        case INVALID_EMAIL_EXCEPTION_CODE:
+          throw FirebaseSignUpAuthInvalidEmailException();
+        case OPERATION_NOT_ALLOWED_EXCEPTION_CODE:
+          throw FirebaseSignUpAuthOperationNotAllowedException();
+        case WEAK_PASSWORD_EXCEPTION_CODE:
+          throw FirebaseSignUpAuthWeakPasswordException();
+        default:
+          throw FirebaseSignInAuthException(message: e.code);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<bool> signUpdelivery(
+      {required String email,
+      required String password,
+      required String fullname,
+     required String plateNo,
+     required String maxCapacity,
+      }) async {
+    try {
+      final UserCredential userCredential = await firebaseAuth!
+          .createUserWithEmailAndPassword(email: email, password: password);
+      final String uid = userCredential.user!.uid;
+      if (userCredential.user!.emailVerified == false) {
+        await userCredential.user!.sendEmailVerification();
+      }
+      await userCredential.user!.updateProfile(displayName: fullname);
+      await UserDatabaseHelper().createTransporter(uid,maxCapacity,plateNo,fullname);
       return true;
     } on MessagedFirebaseAuthException {
       rethrow;

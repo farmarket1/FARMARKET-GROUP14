@@ -20,9 +20,11 @@ class _SignUpFormState extends State<SignUpForm> {
   final TextEditingController nameFieldController = TextEditingController();
   final TextEditingController emailFieldController = TextEditingController();
   final TextEditingController passwordFieldController = TextEditingController();
+  final TextEditingController maxCapacityFieldController =
+      TextEditingController();
+  final TextEditingController noPlateFieldController = TextEditingController();
 
   bool _viewPassword = false;
-  bool _isSeller = false;
 
   @override
   void dispose() {
@@ -109,7 +111,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   Widget buildVehiclePlateFormField() {
     return TextFormField(
-      // controller: nameFieldController,
+      controller: noPlateFieldController,
       keyboardType: TextInputType.name,
       decoration: InputDecoration(
         hintText: "Enter your vehicle plate number",
@@ -131,6 +133,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   Widget buildMaxCapacityFormField() {
     return TextFormField(
+      controller: maxCapacityFieldController,
       keyboardType: TextInputType.name,
       decoration: InputDecoration(
         hintText: "Enter your vehicle maximum capacity",
@@ -181,11 +184,12 @@ class _SignUpFormState extends State<SignUpForm> {
       bool? signUpStatus = false;
       String? snackbarMessage;
       try {
-        final signUpFuture = authService.signUp(
+        final signUpFuture = authService.signUpdelivery(
           email: emailFieldController.text.trim(),
           password: passwordFieldController.text,
           fullname: nameFieldController.text.trim(),
-          isSeller: _isSeller,
+          plateNo: noPlateFieldController.text.trim(),
+          maxCapacity: maxCapacityFieldController.text.trim(),
         );
         signUpFuture.then((value) => signUpStatus = value);
         signUpStatus = await showDialog(
