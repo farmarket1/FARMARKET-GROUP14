@@ -258,7 +258,7 @@ class UserDatabaseHelper {
     if (currentCount <= 1) {
       return removeProductFromCart(cartItemID);
     } else {
-      docRef.update({CartItem.ITEM_COUNT_KEY: FieldValue.increment(-1)});
+      docRef.update({CartItem.ITEM_COUNT_KEY: FieldValue.increment(-10)});
     }
     return true;
   }

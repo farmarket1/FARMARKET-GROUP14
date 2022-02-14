@@ -6,7 +6,6 @@ import 'package:e_commerce_app_flutter/exceptions/firebaseauth/signup_exceptions
 import 'package:e_commerce_app_flutter/services/authentification/authentification_service.dart';
 import 'package:e_commerce_app_flutter/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:logger/logger.dart';
 
 import '../../../constants.dart';
@@ -134,9 +133,7 @@ class _SignUpFormState extends State<SignUpForm> {
             },
             icon:
                 Icon(_viewPassword ? Icons.visibility_off : Icons.visibility)),
-        // CustomSuffixIcon(
-        //   svgIcon: "assets/icons/Lock.svg",
-        // ),
+       
       ),
       validator: (value) {
         if (passwordFieldController.text.isEmpty) {

@@ -67,22 +67,22 @@ class _AddressDetailsFormState extends State<AddressDetailsForm> {
         children: [
           SizedBox(height: getProportionateScreenHeight(20)),
           buildTitleField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
-          buildReceiverField(),
+          // SizedBox(height: getProportionateScreenHeight(30)),
+          // buildReceiverField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildAddressLine1Field(),
-          SizedBox(height: getProportionateScreenHeight(30)),
-          buildAddressLine2Field(),
+          // SizedBox(height: getProportionateScreenHeight(30)),
+          // buildAddressLine2Field(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildCityField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildDistrictField(),
           SizedBox(height: getProportionateScreenHeight(30)),
-          buildStateField(),
+          buildRegionField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildLandmarkField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
-          buildPincodeField(),
+          // SizedBox(height: getProportionateScreenHeight(30)),
+          // buildPincodeField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildPhoneField(),
           SizedBox(height: getProportionateScreenHeight(30)),
@@ -225,13 +225,13 @@ class _AddressDetailsFormState extends State<AddressDetailsForm> {
     );
   }
 
-  Widget buildStateField() {
+  Widget buildRegionField() {
     return TextFormField(
       controller: stateFieldController,
       keyboardType: TextInputType.name,
       decoration: InputDecoration(
-        hintText: "Enter State",
-        labelText: "State",
+        hintText: "Enter region",
+        labelText: "region",
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       validator: (value) {
@@ -382,7 +382,7 @@ class _AddressDetailsFormState extends State<AddressDetailsForm> {
       district: districtFieldController.text,
       state: stateFieldController.text,
       landmark: landmarkFieldController.text,
-      pincode: pincodeFieldController.text,
+      // pincode: pincodeFieldController.text,
       phone: phoneFieldController.text,
     );
   }
