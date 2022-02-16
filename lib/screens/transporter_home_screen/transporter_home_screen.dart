@@ -1,14 +1,10 @@
 import 'dart:async';
 import 'package:e_commerce_app_flutter/models/Product.dart';
 import 'package:e_commerce_app_flutter/services/database/product_database_helper.dart';
-import 'package:e_commerce_app_flutter/services/database/user_database_helper.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -19,8 +15,6 @@ class TransporterHomeScreen extends StatefulWidget {
 
 class _MechanicMapState extends State<TransporterHomeScreen> {
   Completer<GoogleMapController> _mapController = Completer();
-  TextEditingController _latitudeController = TextEditingController();
-  TextEditingController _longitudeController = TextEditingController();
 
   Product? _currentSeller;
   bool _disappear = false;
@@ -44,10 +38,7 @@ class _MechanicMapState extends State<TransporterHomeScreen> {
       speedAccuracy: 90.0);
   late BitmapDescriptor workshopIcon;
 
-  String? _ongoingRepairID;
-  Map<String, dynamic>? _ongoingRepair;
   bool _isFindingMechanic = false;
-  bool _isPaired = false;
 
   /// Determine the current position of the device.
   ///
@@ -190,38 +181,6 @@ class _MechanicMapState extends State<TransporterHomeScreen> {
     });
   }
 
-  void _showHome() async {
-    final GoogleMapController controller = await _mapController.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(
-      const CameraPosition(
-        target: LatLng(12.960632, 77.641603),
-        zoom: 15.0,
-      ),
-    ));
-  }
-
-  void _addPoint(double lat, double lng) {
-    GeoFirePoint geoFirePoint = geo.point(latitude: lat, longitude: lng);
-    _firestore
-        .collection('locations')
-        .add({'name': 'random name', 'position': geoFirePoint.data}).then((_) {
-      print('added ${geoFirePoint.hash} successfully');
-    });
-    setState(() {});
-  }
-
-  //example to add geoFirePoint inside nested object
-  void _addNestedPoint(double lat, double lng) {
-    GeoFirePoint geoFirePoint = geo.point(latitude: lat, longitude: lng);
-    _firestore.collection('nestedLocations').add({
-      'name': 'random name',
-      'address': {
-        'location': {'position': geoFirePoint.data}
-      }
-    }).then((_) {
-      print('added ${geoFirePoint.hash} successfully');
-    });
-  }
 
   void _addMarker(DocumentSnapshot document) async {
     GeoPoint point = document['position']['geopoint'];
@@ -254,103 +213,12 @@ class _MechanicMapState extends State<TransporterHomeScreen> {
     });
   }
 
-  double _value = 40.0;
-  String _label = '';
 
   changed(value) {
     setState(() {
-      _value = value;
-      _label = '${_value.toInt().toString()} kms';
       markers.clear();
       radius.add(value);
     });
-  }
-
-  void _findMechanic() async {
-    setState(() {
-      _isFindingMechanic = true;
-    });
-
-    GeoFirePoint geoFirePoint =
-        geo.point(latitude: _position.latitude, longitude: _position.longitude);
-    _firestore.collection('requests')
-      ..add({
-        'uid': FirebaseAuth.instance.currentUser!.uid,
-        'name': FirebaseAuth.instance.currentUser!.displayName,
-        'position': geoFirePoint.data,
-        'status': 'requesting',
-        'request_time': FieldValue.serverTimestamp(),
-      }).then((docRef) {
-        _ongoingRepairID = docRef.id;
-        Timer(Duration(seconds: 30), () {
-          print('>>>>>>>>>>>>>>>>>> yep aint no one replying');
-        });
-        _firestore
-            .collection('requests')
-            .doc(docRef.id)
-            .snapshots()
-            .listen((event) {
-          final data = event.data();
-          if (data!['status'] == 'paired') {
-            setState(() {
-              _ongoingRepair = data;
-              _isPaired = true;
-              _isFindingMechanic = false;
-            });
-          }
-        });
-      });
-  }
-
-  void _cancelSearch() {
-    _firestore
-        .collection('requests')
-        .doc(_ongoingRepairID)
-        .delete()
-        .then((value) {
-      setState(() {
-        _isFindingMechanic = false;
-      });
-    });
-  }
-
-  void _cancelRequest() {
-    setState(() {
-      _isFindingMechanic = true;
-    });
-
-    final batch = _firestore.batch();
-
-    batch.update(_firestore.collection('requests').doc(_ongoingRepairID), {
-      'status': 'cancelled',
-    });
-
-    batch.update(
-        _firestore
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser!.uid),
-        {
-          'repairs': [],
-        });
-
-    batch.commit().then((value) {
-      setState(() {
-        _isPaired = false;
-        _isFindingMechanic = false;
-      });
-    });
-  }
-
-  _makePhoneCall(String phoneNumber) async {
-    // Use `Uri` to ensure that `phoneNumber` is properly URL-encoded.
-    // Just using 'tel:$phoneNumber' would create invalid URLs in some cases,
-    // such as spaces in the input, which would cause `launch` to fail on some
-    // platforms.
-    final Uri launchUri = Uri(
-      scheme: 'tel',
-      path: phoneNumber,
-    );
-    await launch(launchUri.toString());
   }
 
   _sellerDetailsWidget() {

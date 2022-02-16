@@ -15,7 +15,7 @@ Future<bool> showConfirmationDialog(
           borderRadius: BorderRadius.circular(15),
         ),
         actions: [
-          FlatButton(
+          TextButton(
             child: Text(
               positiveResponse,
               style: TextStyle(
@@ -26,7 +26,7 @@ Future<bool> showConfirmationDialog(
               Navigator.pop(context, true);
             },
           ),
-          FlatButton(
+          TextButton(
             child: Text(
               negativeResponse,
               style: TextStyle(
