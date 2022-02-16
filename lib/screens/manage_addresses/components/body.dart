@@ -131,13 +131,13 @@ class _BodyState extends State<Body> {
           title: Text("Confirmation"),
           content: Text("Are you sure you want to delete this Address ?"),
           actions: [
-            FlatButton(
+            TextButton(
               child: Text("Yes"),
               onPressed: () {
                 Navigator.pop(context, true);
               },
             ),
-            FlatButton(
+            TextButton(
               child: Text("No"),
               onPressed: () {
                 Navigator.pop(context, false);
